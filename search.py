@@ -88,7 +88,24 @@ def depthFirstSearch(problem):
     """
     "*** YOUR CODE HERE ***"
 
+    stack = util.Stack()
+
+    visited = set()
+    stack.push((problem.getStartState(), []))
+
+    while not stack.isEmpty():
+        state, actions = stack.pop()
+
+        if problem.isGoalState(state):
+            return actions
+        
+        visited.add(state)
+
+        for successor_state, action, _ in problem.getSuccessors(state):
+            if successor_state not in visited:
+                stack.push((successor_state, actions + [action]))
     
+    return []
 
     # util.raiseNotDefined()
 
